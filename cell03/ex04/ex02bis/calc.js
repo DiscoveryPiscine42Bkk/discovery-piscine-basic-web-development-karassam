@@ -3,9 +3,9 @@ function isPositiveInteger(value) {
 }
 
 function calculate() {
-  const left = document.getElementById('left').value;
-  const right = document.getElementById('right').value;
-  const op = document.getElementById('operator').value;
+  const left = $('#left').val();
+  const right = $('#right').val();
+  const op = $('#operator').val();
 
   if (!isPositiveInteger(left) || !isPositiveInteger(right)) {
     alert('Error :(');
@@ -22,7 +22,7 @@ function calculate() {
   }
 
   let result;
-  switch(op) {
+  switch (op) {
     case '+': result = a + b; break;
     case '-': result = a - b; break;
     case '*': result = a * b; break;
@@ -35,6 +35,10 @@ function calculate() {
   console.log('Result:', result);
 }
 
-setInterval(() => {
-  alert('Please, use me...');
-}, 30000);
+$(document).ready(function () {
+  $('#tryMe').on('click', calculate);
+
+  setInterval(function () {
+    alert('Please, use me...');
+  }, 30000);
+});

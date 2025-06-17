@@ -1,0 +1,40 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  scroll-behavior: smooth;
+}
+
+.parallax {
+  height: 100vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-shadow: 2px 2px 4px #000;
+  font-size: 2em;
+}
+
+.parallax-1 {
+  background-image: url('https://static.wixstatic.com/media/ee72a6_a23ef77e775142b2bcd68f16b45264ef~mv2.png/v1/fill/w_980,h_551,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee72a6_a23ef77e775142b2bcd68f16b45264ef~mv2.png');
+}
+
+.parallax-2 {
+  background-image: url('https://images2.alphacoders.com/137/thumb-1920-1378156.png');
+}
+
+.content {
+  background-color: #000;
+  color: white;
+  padding: 100px 20px;
+  text-align: center;
+}
