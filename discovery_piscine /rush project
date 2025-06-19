@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สาขาสถาปัตยกรรม - ค.อ.บ. (5 ปี)</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Sarabun', 'Kanit', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        nav {
+            background: white;
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: rgb(183, 20, 137);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #1a3a5f;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .page-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: #e74c3c;
+            border-radius: 2px;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(26, 58, 95, 0.85), rgba(26, 58, 95, 0.85)), url('./S__27607146_0.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: 2px solid #e74c3c;
+        }
+        
+        .btn:hover {
+            background: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .team-section {
+            margin-top: 3rem;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .team-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .team-img {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .team-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .team-card:hover .team-img img {
+            transform: scale(1.1);
+        }
+        
+        .team-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .team-info h3 {
+            color: #1a3a5f;
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .member-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .member-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .member-img {
+            flex: 0 0 250px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .member-img img {
+            width: 100%;
+            display: block;
+        }
+        
+        .member-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .member-info h1 {
+            color: #1a3a5f;
+            margin-bottom: 1rem;
+            font-size: 2.2rem;
+        }
+        
+        .member-info h2 {
+            color: #e74c3c;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        
+        .member-section {
+            margin-bottom: 3rem;
+        }
+        
+        .member-section h3 {
+            color: #1a3a5f;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e74c3c;
+            display: inline-block;
+        }
+        
+        .course-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .course-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .course-card h4 {
+            color: #1a3a5f;
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .contact-link {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            background: #1a3a5f;
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .contact-link:hover {
+            background: #e74c3c;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
+        .contact-link i {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        footer {
+            background: #1a3a5f;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: #1a3a5f;
+                flex-direction: column;
+                padding: 1rem 0;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 0.5rem 0;
+                text-align: center;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .member-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .member-info {
+                min-width: 100%;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .hero {
+                padding: 3rem 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .contact-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="./S__27607145_0.jpg" width="300px">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" id="home-link"><i class="fas fa-home"></i> หน้าหลัก</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="home-page">
+            <div class="hero">
+                <h1>คณะครุศาสตร์อุตสาหกรรม สาขาสถาปัตยกรรม</h1>
+                <p>หลักสูตรครุศาสตร์อุตสาหกรรมบัณฑิต สาขาวิชาสถาปัตยกรรม (หลักสูตร 5 ปี) ที่มุ่งเน้นการสร้างบัณฑิตที่มีความรู้ทั้งทฤษฎีและปฏิบัติในวิชาชีพสถาปัตยกรรม พร้อมคุณธรรมและจริยธรรม</p>
+            </div>
+            
+            <div class="program-info" style="margin-top: 4rem; background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.08);">
+                <h2 class="page-title">เกี่ยวกับหลักสูตร</h2>
+                <p>หลักสูตรครุศาสตร์อุตสาหกรรมบัณฑิต สาขาวิชาสถาปัตยกรรม (5 ปี) เป็นหลักสูตรที่มุ่งสร้างบัณฑิตให้มีความรู้ทั้งทฤษฎีและปฏิบัติในวิชาชีพสถาปัตยกรรม พร้อมคุณธรรมและจริยธรรม สามารถทำงานได้ทั้งในสถานศึกษาและหน่วยงานต่าง ๆ</p>
+                
+                <h3 style="margin: 1.5rem 0 1rem; color: #1a3a5f;">อาชีพหลังสำเร็จการศึกษา</h3>
+                <ul style="padding-left: 1.5rem; columns: 2; column-gap: 2rem;">
+                    <li style="margin-bottom: 0.5rem;">ครูหรืออาจารย์ผู้สอน</li>
+                    <li style="margin-bottom: 0.5rem;">สถาปนิกในหน่วยงานภาครัฐและเอกชน</li>
+                    <li style="margin-bottom: 0.5rem;">นักวิชาการด้านสถาปัตยกรรม</li>
+                    <li style="margin-bottom: 0.5rem;">นักวิชาการด้านการจัดฝึกอบรม</li>
+                    <li style="margin-bottom: 0.5rem;">ผู้เชี่ยวชาญด้านความคิดสร้างสรรค์</li>
+                    <li style="margin-bottom: 0.5rem;">ผู้แนะนำด้านการเลือกใช้วัสดุ</li>
+                    <li style="margin-bottom: 0.5rem;">ที่ปรึกษาและประสานงานด้านสถาปัตยกรรม</li>
+                    <li style="margin-bottom: 0.5rem;">ผู้ประมาณราคางานออกแบบ</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div id="member1-page">
+            <div class="member-container">
+                <div class="member-header">
+                    <div class="member-img">
+                        <img src="https://roadoftheking.com/wp-content/uploads/2019/10/OCG201907-Meta.jpg" alt="สมฤดี ใจดี">
+                    </div>
+                    <div class="member-info">
+                        <h1>นางสาวกัญญาวีร์ รัสมี</h1>
+                        <h2>คณะครุศาสตร์อุตสาหกรรม สาขาสถาปัตยกรรม</h2>
+                        <p>https://www.instagram.com/yasm9_?igsh=MWNhenpta3BxamF0MQ%3D%3D&utm_source=qr</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="member2-page">
+            <div class="member-container">
+                <div class="member-header">
+                    <div class="member-img">
+                        <img src="https://images.unsplash.com/photo-1557862921-37829c790f19?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="ธีรภัทร สุขใจ">
+                    </div>
+                    <div class="member-info">
+                        <h1>นายธีรภัทร สุขใจ</h1>
+                        <h2>คณะครุศาสตร์อุตสาหกรรม สาขาสถาปัตยกรรม</h2>
+                        <p>นักศึกษาชั้นปีที่ 3 ที่มีความสนใจในด้านการออกแบบอาคารสูงและเทคโนโลยีการก่อสร้างสมัยใหม่</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>คณะครุศาสตร์อุตสาหกรรม สาขาสถาปัตยกรรม (5 ปี) | มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี</p>
+        <p>© 2023 สาขาสถาปัตยกรรม - ค.อ.บ. | All Rights Reserved</p>
+    </footer>
+    
+    <script>
+        $(document).ready(function() {
+            $('.menu-toggle').click(function() {
+                $('.nav-links').toggleClass('active');
+            });
+            
+            $('#home-link').click(function(e) {
+                e.preventDefault();
+                showPage('home-page');
+            });
+            
+            function showPage(pageId) {
+                $('#home-page').hide();
+                
+                $('#' + pageId).show();
+                
+                $('.nav-links').removeClass('active');
+                
+                $('html, body').animate({ scrollTop: 0 }, 300);
+            }
+        });
+    </script>
+</body>
+</html>
